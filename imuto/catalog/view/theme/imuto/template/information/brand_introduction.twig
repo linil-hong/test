@@ -1,0 +1,101 @@
+{{ header }}
+<div id="information-information" class="container-fluid content-container">
+    <div class="row breadcrumb-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb">
+                        {% for breadcrumb in breadcrumbs %}
+                            <li class="font14"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="information-item-box">
+                        <h3 class="information-title text-uppercase"><img src="/catalog/view/theme/imuto/image/icon/icon-contact-imuto.png" class="img-responsive"  style="max-width: 180px;margin-bottom: 18px;margin-left: -10px;"></h3>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_aff}}
+                            </h4>
+                            <p class="font14">
+                                {{text_We_eliminate}}
+                            </p>
+                        </div>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_Less}}
+                            </h4>
+                            <p class="font14">
+                                {{text_We_use}}
+                            </p>
+                        </div>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_From}}
+                            </h4>
+                            <p class="font14">
+                                {{text_We_abstract}}
+                            </p>
+                        </div>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_Eco_friendly}}
+                            </h4>
+                            <p class="font14">
+                                {{text_We_make}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="information-item-box">
+                        <h3 class="information-title text-uppercase"><img src="/catalog/view/theme/imuto/image/icon/icon-contact-photoolex.png" class="img-responsive"  style="max-width: 180px;margin-bottom: 18px;"></h3>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_Accumulation}}
+                            </h4>
+                            <p class="font14">
+                                {{text_A_professional}}
+                            </p>
+                        </div>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_Professionalism}}
+                            </h4>
+                            <p class="font14">
+                                {{text_Own_plant}}
+                            </p>
+                        </div>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                                {{text_Amazing}}
+                            </h4>
+                            <p class="font14">
+                                {{text_Constantly}}
+                            </p>
+                        </div>
+                        <div class="information-paragraph">
+                            <h4 class="font16 font-bold">
+                               {{text_Cost}}
+                            </h4>
+                            <p class="font14">
+                                {{text_Excellent}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="information-item-box">
+                        <h3 class="information-title text-uppercase"><img src="/catalog/view/theme/imuto/image/icon/icon-contact-topturbo.jpg" class="img-responsive" style="max-width: 180px;margin-bottom: 18px;"></h3>
+                        <p class="font14">
+                            {{text_Offers}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

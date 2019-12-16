@@ -1,0 +1,115 @@
+<footer>
+  <div class="footer-information">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 margin-bottom20">
+          <form action="{{ login_action }}" method="post">
+            <div class="form-group" id="footer-subscribe">
+              <label for="signUpInputEmail" class="font14"><i class="fa fa-user font25"></i>&nbsp;{{ text_email }}&nbsp;</label>
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" id="signUpInputEmail" placeholder="">
+              </div>
+            </div>
+            <div class="form-group" id="footer-subscribe">
+              <label for="signUpInputPassword" class="font14">{{ text_password }}</label>
+              <a class="pull-right" href="{{ forgotten }}">{{ text_forgot_pw }}</a>
+              <div class="input-group">
+                <input type="password" class="form-control" name="password" id="signUpInputPassword" placeholder="">
+              <span class="input-group-btn">
+                <button class="btn btn-subscribe2 btn-purple" type="submit">{{ text_sign_in }}</button>
+              </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-lg-offset-1 col-md-4 col-sm-4 col-xs-12 margin-bottom20">
+          <div class="footer-email-info-title">
+            <i class="fa fa-envelope-o font25"></i>&nbsp;
+            <span class="font16">{{ text_email }}</span>
+          </div>
+          <div class="margin-bottom20">
+            <div class="font-bold">
+              imuto
+            </div>
+            <div>
+              {{ text_customer }}: <a href="mailto:support@imuto.com">support@imuto.com</a>
+            </div>
+            <div>
+              {{ text_business }}: <a href="mailto:marketing@imuto.com">marketing@imuto.com</a>
+            </div>
+          </div>
+          <div class="margin-bottom20">
+            <div class="font-bold">
+              PHOTOOLEX
+            </div>
+            <div>
+              {{ text_customer }}: <a href="mailto:support@photoolex.net">support@photoolex.net</a>
+            </div>
+            <div>
+              {{ text_business }}: <a href="mailto:marketing@imuto.com">marketing@imuto.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-sm-4 col-xs-12 margin-bottom20">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-6 text-center">
+                <div>
+                  <img src="/catalog/view/theme/imuto/image/icon/qrcode_imuto.jpg" class="img-responsive">
+                </div>
+                <div class="text-center font12">
+                  {{ text_mob_web }}
+                </div>
+              </div>
+              <div class="col-xs-6 text-center">
+                <div>
+                  <img src="/catalog/view/theme/imuto/image/icon/qrcode_fb.jpg" class="img-responsive">
+                </div>
+                <div class="text-center font12">
+                  {{ text_save }}
+                </div>
+              </div>
+            </div>
+            <div class="row footer-icon-box" style="margin-top:15px;">
+              <div class="col-xs-12">
+                <ul class="list-unstyled list-inline text-center">
+                  <li>
+                    <a href="http://www.imuto.com/im_bbs/" target="_blank"><i class="imuto-footer-icon-im"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://www.facebook.com/imutopower" target="_blank"><i class="imuto-footer-icon-fb"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/imuto_official" target="_blank"><i class="imuto-footer-icon-twitter"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://m.youtube.com/channel/UC9XY1tWyhvWEeO-MkJnPILg" target="_blank"><i class="imuto-footer-icon-youtube"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://www.instagram.com/explore/tags/imuto/?hl=zh-cn" target="_blank"><i class="imuto-footer-icon-ins"></i></a>
+                  </li>
+                  <li>
+                    <a href="https://www.pinterest.com/imutoofficial" target="_blank"><i class="imuto-footer-icon-pins"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="footer-copyright text-center">
+    {{ powered }}
+</div>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+</div>
+</body></html>

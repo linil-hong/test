@@ -1,0 +1,77 @@
+{{ header }}
+<div id="information-information" class="container-fluid content-container">
+  <div class="row breadcrumb-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+              <li class="font14"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row online-sales-content">
+    <div class="container">
+      <div class="row introduction-title online-sales-title">
+        <i class="col-lg-5 col-md-4 col-sm-4 col-xs-3 title-line"></i>
+        <span class="text-uppercase text-center col-lg-2 col-md-4 col-sm-4 col-xs-6 font-bold">{{ text_online_sales }}</span>
+        <i class="col-lg-5 col-md-4 col-sm-4 col-xs-3 title-line"></i>
+      </div>
+      <!-- Amazon -->
+      <div class="row">
+        <img src="{{ online_sales.amazon.icon }}" class="img-responsive online-sales-shop-icon online-sales-amazon-icon">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-2 col-md-2 online-sales-country-label">
+          {{ text_select_country }}
+        </div>
+        {% for amazon_country in online_sales.amazon.countries %}
+        <div class="col-xs-3 col-sm-2 col-md-1 text-center online-sales-country-container">
+          <a href="{{ amazon_country.href }}" target="_blank"><img src="{{ amazon_country.image }}" class="img-responsive online-sales-country-icon"></a>
+        </div>
+        {% endfor %}
+      </div>
+      <br>
+      <br>
+      <br>
+
+      <!-- SOUQ -->
+<!--      <div class="row">
+        <img src="{{ online_sales.souq.icon }}" class="img-responsive online-sales-shop-icon online-sales-souq-icon">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-2 col-md-2 online-sales-country-label">
+          {{ text_select_country }}
+        </div>
+        {% for souq_country in online_sales.souq.countries %}
+          <div class="col-xs-3 col-sm-2 col-md-1 text-center online-sales-country-container">
+            <a href="{{ souq_country.href }}" target="_blank"><img src="{{ souq_country.image }}" class="img-responsive online-sales-country-icon"></a>
+          </div>
+        {% endfor %}
+      </div>
+      <br>
+      <br>
+      <br>
+-->
+      <!-- Walmart -->
+<!--      <div class="row">
+        <img src="{{ online_sales.walmart.icon }}" class="img-responsive online-sales-shop-icon">
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-2 col-md-2 online-sales-country-label">
+          {{ text_select_country }}
+        </div>
+        {% for walmart_country in online_sales.walmart.countries %}
+          <div class="col-xs-3 col-sm-2 col-md-1 text-center online-sales-country-container">
+            <a href="{{ walmart_country.href }}" target="_blank"><img src="{{ walmart_country.image }}" class="img-responsive online-sales-country-icon"></a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+-->
+{{ footer }}

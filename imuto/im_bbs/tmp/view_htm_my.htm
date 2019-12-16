@@ -1,0 +1,109 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+
+
+<div class="btn-group mb-3 d-lg-none" role="group" id="my_mobile_nav">
+
+	
+	<a role="button" class="btn btn-secondary" data-active="menu-my" href="<?php echo url('my');?>">My Account</a>
+	
+	
+	
+	<a role="button" class="btn btn-secondary" data-active="menu-my-thread" href="<?php echo url('my-thread');?>">Forum post</a>
+	
+	
+</div>
+
+<div class="row">
+	<!-- 左侧菜单 -->
+	<div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
+		<div class="card">
+			<div class="card-body text-center">
+				
+				<img class="avatar-4" src="<?php echo $user['avatar_url'];?>">
+				<br><?php echo $user['username'];?>
+				
+			</div>
+			<div class="list-group list-group-flush text-center">
+				
+				<a href="<?php echo url('my');?>" class="list-group-item list-group-item-action" data-active="menu-my">My Account</a>
+				
+				
+				
+				<a href="<?php echo url('my-thread');?>" class="list-group-item list-group-item-action" data-active="menu-my-thread">Forum post</a>
+				
+				
+			</div>
+		</div>
+	</div>
+	<!-- 右侧内容 -->
+	<div class="col-lg-10" id="my_main">
+		
+		<div class="card">
+			<div class="card-header">
+				
+				
+		<ul class="nav nav-tabs card-header-tabs">
+			
+			
+			
+			<li class="nav-item">
+				<a class="nav-link " href="<?php echo url("my");?>" data-active="my-profile"><?php echo lang('my_basic_profile');?></a>
+			</li>
+			
+			
+			
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo url("my-password");?>" data-active="my-password"><?php echo lang('modify_password');?></a>
+			</li>
+			
+			
+			
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo url("my-avatar");?>" data-active="my-avatar"><?php echo lang('modify_avatar');?></a>
+			</li>
+			
+			
+			
+		</ul>
+	
+				
+			</div>
+			<div class="card-body">
+				
+				
+		<div class="row line-height-4">
+			<div class="col-md-6">
+				<span class="text-muted"><?php echo lang('threads');?>：</span><?php echo $user['threads'];?>
+				<br><span class="text-muted"><?php echo lang('posts');?>：</span><?php echo $user['posts'];?>
+				
+			</div>
+			<div class="col-md-6">
+				<span class="text-muted"><?php echo lang('user_group');?>：</span><?php echo $user['groupname'];?>
+				<br><span class="text-muted"><?php echo lang('create_date');?>：</span><?php echo $user['create_date_fmt'];?>
+				<br><span class="text-muted"><?php echo lang('last_login_date');?>：</span><?php echo $user['login_date_fmt'];?>
+				<br><span class="text-danger"><?php echo lang('email');?>：</span><?php echo $user['email'];?>
+				
+			</div>
+		</div>	
+	
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+
+
+<script>
+$('a[data-active="menu-my"]').addClass('active');
+</script>
+
+<script>
+$('a[data-active="my-profile"]').addClass('active');
+</script>

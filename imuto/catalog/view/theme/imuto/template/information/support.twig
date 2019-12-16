@@ -1,0 +1,53 @@
+{{ header }}
+<div id="information-information" class="container-fluid content-container">
+  <div class="row breadcrumb-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+              <li class="font14"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container text-center support-container">
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <p>
+          <img src="/catalog/view/theme/imuto/image/icon/icon-warranty-support.png" class="img-responsive">
+        </p>
+        <p class="font-bold font14">
+          {{text_18}}
+        </p>
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <p>
+          <img src="/catalog/view/theme/imuto/image/icon/icon-email-support.png" class="img-responsive">
+        </p>
+        <p class="font-bold font14">
+          {{text_24}}
+        </p>
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <p>
+          <img src="/catalog/view/theme/imuto/image/icon/icon-customer-support.png" class="img-responsive">
+        </p>
+        <p class="font-bold font14">
+          {{text_customer_support}}
+        </p>
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <p>
+          <img src="/catalog/view/theme/imuto/image/icon/icon-download-support.png" class="img-responsive">
+        </p>
+        <p class="font-bold font14">
+          {{text_download_information}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

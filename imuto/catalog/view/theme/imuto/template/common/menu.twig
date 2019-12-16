@@ -1,0 +1,68 @@
+{% if categories %}
+<div class="container-fluid menu-container">
+  <div class="row">
+    <div class="container">
+      <nav id="menu" class="navbar">
+        <div class="navbar-header">
+          <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav responsive-pull-right">
+            {% for key, category in categories %}
+              {% if category.children %}
+                <li class="dropdown"><a href="{{ category.href }}" class="dropdown-toggle {{ category.active }}" data-toggle="dropdown">{{ category.name }}</a>
+                  <div class="dropdown-menu {% if key == 4 %}dropdown-menu-right{% endif %}">
+                    <div class="dropdown-inner category-child-list">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-xs-4">
+                            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+                              <ul class="list-unstyled">
+                                {% for child in children %}
+                                  <li>
+                                    <a class="category-child-link" href="{{ child.href }}">{{ child.name }}</a>
+                                    <img src="{{ child.image }}" class="category-child-img" data-id="{{ key }}">
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endfor %}
+                          </div>
+                          <div class="col-xs-8">
+                            <img src="{{ category['children'][0]['image'] }}" class="img-responsive category-child-img-replace{{ key }}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              {% else %}
+                <li><a href="{{ category.href }}" class="{{ category.active }}">{{ category.name }}</a></li>
+              {% endif %}
+            {% endfor %}
+            <li><a href="{{ support }}" class="{{ support_active }}">{{ text_support }}</a></li>
+            <li class="dropdown">
+              <a href="{{ about_us }}" class="dropdown-toggle {{ about_us_active }}" data-toggle="dropdown">{{ text_about_us }}</a>
+              <div class="dropdown-menu fit" style="width:550px;height:179px;">
+                <div class="dropdown-inner" style="float:left">
+                  <ul class="list-unstyled">
+                    <li><a href="{{ company_profile }}" style="width:169px">{{ text_company_profile }}</a>
+                    </li>
+                    <li><a href="{{ brand_introduction }}" style="width:169px">{{ text_brand_introduction }}</a></li>
+                    <li><a href="{{ contact_us }}" style="width:169px">{{ text_contact_us }}</a></li>
+                  </ul>
+                </div>
+                <div style="float:left">
+                  <img src="/catalog/view/theme/imuto/image/about us.jpg" style="width:368px;height:156px;padding-left:0px;" class="category-child-img" data-id="{{ key }}">
+                </div>
+              </div>
+            </li>
+            <li><a href="{{ where_to_buy }}" class="{{ where_to_buy_active }}">{{ text_where_to_buy }}</a></li>
+            <li><a href="{{ download }}" class="{{ download_active }}">{{ text_download }}</a></li>
+          </ul>
+          <span class="clearfix"></span>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+{% endif %} 

@@ -1,0 +1,40 @@
+{% if languages|length > 0 %}
+  <div class="pull-right">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-language">
+      <div class="btn-group">
+        <button class="btn btn-link dropdown-toggle language-btn" data-toggle="dropdown" style="margin-top: 4px;">
+          {% for language in languages %}
+            {% if language.code == code %}
+              <img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}" title="{{ language.name }}">
+            {% endif %}
+          {% endfor %}
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          {% for language in languages %}
+            <li>
+              <button class="btn btn-link btn-block language-select" type="button" name="{{ language.code }}"><img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}" title="{{ language.name }}" /> {{ language.name }}</button>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <input type="hidden" name="code" value="" />
+      <input type="hidden" name="redirect" value="{{ redirect }}" />
+    </form>
+  </div>
+{% elseif languages|length > 0 %}
+  <div class="pull-right">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-language">
+      <div class="btn-group">
+        <button class="btn btn-link dropdown-toggle language-btn" data-toggle="dropdown" style="margin-top: 4px;">
+          {% for language in languages %}
+            {% if language.code == code %}
+              <img src="catalog/language/{{ language.code }}/{{ language.code }}.png" alt="{{ language.name }}" title="{{ language.name }}">
+            {% endif %}
+          {% endfor %}
+        </button>
+      </div>
+      <input type="hidden" name="code" value="" />
+      <input type="hidden" name="redirect" value="{{ redirect }}" />
+    </form>
+  </div>
+{% endif %}

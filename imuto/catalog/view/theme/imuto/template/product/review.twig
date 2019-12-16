@@ -1,0 +1,87 @@
+{% if reviews %}
+{% for review in reviews %}
+  <div class="review-container margin-top30">
+    <div class="rating margin-bottom20">
+      {% for i in 1..5 %}
+        {% if review.rating < i %}
+          <span class="icon-star star-normal"></span>
+        {% else %}
+          <span class="icon-star star-selected"></span>
+        {% endif %}
+      {% endfor %}
+
+      &nbsp;&nbsp;<span class="font-bold review-title">{{ review.title }}</span>
+    </div>
+    <div class="margin-bottom20">
+      <span class="margin-right30">{{ review.author }}</span>
+      <span>{{ review.date_added }}</span>
+    </div>
+    <div class="margin-bottom40">
+      {{ review.text }}
+    </div>
+    
+    <div class="review-img">
+    {% for img in review.img %}
+      {% if img %}
+      <div class="margin-bottom40" ><img data-width="{{ img.width }}" data-height="{{ img.height }}" class="image_click" big-src="{{ img.real }}" src="{{ img.mini }}"></div>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+
+<script type="text/javascript">
+  $('.image_click').hover(function() {
+    $(this).css("cursor","pointer");
+  })
+  $(".image_click").click(function() {
+  var imgsrc = $(this).attr("big-src");
+   width = $(this).attr("data-width");
+   height = $(this).attr("data-height");
+
+
+  t = $(this).offset().top-200;  //获取当前标签位置 后向上偏移
+  var opacityBottom = '<div id="opacityBottom" style="display: none"><img class="bigImg" src="'+ imgsrc +'" ></div>';
+  $(document.body).append(opacityBottom);
+  toBigImg();//变大函数
+  })
+ function toBigImg(){
+
+    $("#opacityBottom").addClass("opacityBottom");
+    $("#opacityBottom").show();
+    $("html,body").addClass("none-scroll");//下层不可滑动
+
+    $(".bigImg").css("width",width);  //放大显示原图大小
+    $(".bigImg").css("height",height);
+
+    $(".bigImg").addClass("bigImg");
+    /*隐藏*/
+    $("#opacityBottom").bind("click",clickToSmallImg);
+    $(".bigImg").bind("click",clickToSmallImg);
+    var imgHeight = $(".bigImg").prop("height");
+    var imgWidth = $(".bigImg").prop("width");
+    h = $(window).height();
+    w = $(window).width();
+    if(imgWidth < w){
+        $(".bigImg").css({"left":(w-imgWidth)/2 + 'px'});
+    }else{
+        $(".bigImg").css({"left":'0px'});
+    }
+    if(imgHeight < h){
+        $(".bigImg").css({"top":(h-imgHeight)/2 + 'px'});
+    }else{
+        $(".bigImg").css({"top":'0px'});
+    }
+
+    function clickToSmallImg() {
+        $("html,body").removeClass("none-scroll");
+        $("#opacityBottom").remove();
+        $(window).scrollTop(t);// 跳转到指定位置
+    }
+  }
+ 
+</script>
+<div class="text-center">{{ pagination }}</div>
+{% else %}
+<p>{{ text_no_reviews }}</p>
+{% endif %} 

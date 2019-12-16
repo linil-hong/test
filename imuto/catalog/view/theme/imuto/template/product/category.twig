@@ -1,0 +1,84 @@
+{{ header }}
+<div id="product-category" class="container-fluid category-content-container">
+  <div class="row breadcrumb-container">
+    <div class="container">
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="font14"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="row category-banner">
+    <img src="{{ thumb }}" class="img-responsive img-width-full">
+  </div>
+  {% if products %}
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        {% for product in products %}
+          <div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="product-thumb padding-vertical10">
+              <div class="image"><a href="{{ product.href }}" id="pro{{ product.product_id }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" id="pimg{{ product.product_id }}" /></a></div>
+              <div>
+                <div class="caption">
+                  <h4 class="product-name"><a href="{{ product.href }}">{{ product.model }}</a></h4>
+                  <p>{{ product.summary }}</p>
+                  {% if product.relateds %}
+                    <p>
+                      <span>{{ text_color }}&nbsp;&nbsp;</span>
+                      {% for product_related in product.relateds %}
+                        <a href="{{ product_related.href }}" data-colorimg="{{ product_related.related_products_image }}" data-position="{{ product.product_id }}" class="color-badge" title="{{ product_related.name }}"><span class="" style="background: #{{ product_related.color_code }};border:solid 1px gray"></span></a>
+                        <img src="{{ product_related.related_products_image }}" style="display: none"/>
+                      {% endfor %}
+                    </p>
+                  {% endif %}
+                  {% if product.rating %}
+                    <div class="rating">
+                      {% for i in 1..5 %}
+                        {% if product.rating > i - 1 and product.rating < i %}
+                          <span class="icon-star star-half-selected"></span>
+                        {% elseif product.rating < i %}
+                          <span class="icon-star star-normal"></span>
+                        {% else %}
+                          <span class="icon-star star-selected"></span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <div style="height: 34px;"></div>
+                  {% endif %} </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-sm-12 text-center">{{ pagination }}</div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if not categories and not products %}
+    <div class="row">
+      <div class="container">
+        <div class="row">
+          <p>{{ text_category_empty }}</p>
+          <div class="buttons">
+            <div class="pull-left"><a href="{{ continue }}" class="btn btn-purple">{{ button_continue }}</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+  $(document).on('mouseenter', '.color-badge', function(){
+    var colorImgUrl = $(this).data('colorimg');
+    var proUrl = $(this).attr('href');
+    var positionId = $(this).data('position');
+    $('#pimg' + positionId).attr('src', colorImgUrl);
+    $('#pro' + positionId).attr('href', proUrl);
+  })
+</script>
+{{ footer }} 

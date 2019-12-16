@@ -1,0 +1,34 @@
+{{ header }}
+<div id="information-information" class="container-fluid content-container">
+    <div class="row breadcrumb-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="breadcrumb">
+                        {% for breadcrumb in breadcrumbs %}
+                            <li class="font14"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="information-item-box">
+                        <h3 class="information-title text-uppercase font24">{{text_title}}</h3>
+                        <p class="information-content font14">
+                            {{text_coutent}}
+                        </p>
+                        <p class="text-center">
+                            <img class="img-responsive" src="/catalog/view/theme/imuto/image/company-profile.jpg"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

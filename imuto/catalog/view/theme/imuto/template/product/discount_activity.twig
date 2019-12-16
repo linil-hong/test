@@ -1,0 +1,162 @@
+{{ header }}
+<div id="product-discount-activity" class="container-fluid content-container" style="margin-top: 0;">
+  <div class="row page-banner">
+
+    {% if lang == en %}
+    <img src="/catalog/view/theme/imuto/image/discount-activity.jpg" class="img-responsive img-width-full">
+    {% else %}
+    <img src="/catalog/view/theme/imuto/image/(dicount-activity)_jp.jpg" class="img-responsive img-width-full">
+    {% endif %}
+  </div>
+  <div class="row product-content">
+    <div class="container">
+      {% if products %}
+        <div class="row">
+          {% for product in products %}
+            <div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="product-thumb">
+                {% if product.off %}
+                  <div class="discounts">
+                    <div class="discount-num">
+                      {% if product.product_country_prices %}
+                        <span id="off-{{ product.product_id }}">{{ product.product_country_prices[0].country_off }}</span>
+                      {% else %}
+                        <span id="off-{{ product.product_id }}">{{ product.off }}</span>
+                      {% endif %}
+                    </div>
+                    <div class="discount-text">
+                      <span class="font20">%</span>
+                      <span class="font14">OFF</span>
+                    </div>
+                  </div>
+                {% else %}
+                  <div></div>
+                {% endif %}
+                <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+                <div class="product-info">
+                  <h4 class="product-name"><a href="{{ product.href }}">{{ product.summary }}</a></h4>
+                  {% if product.product_country_prices %}
+                    {% if product.product_country_prices[0].date_start == " " %}
+                      <span id="date-start-{{ product.product_id }}">&nbsp;</span>
+                    {% else %}
+                      <span id="date-start-{{ product.product_id }}">
+                        {{ product.product_country_prices[0].date_start }}&nbsp;  --  &nbsp;{{ product.product_country_prices[0].date_end }}
+                      </span>  
+                    {% endif %}
+                  {% endif %}
+                  <div class="caption">
+                    <div class="col-xs-8 col-sm-8">
+                      <div class="row">
+                        <div class="price text-left">
+                          {% if product.product_country_prices %}
+                            {% if product.product_country_prices[0].original_price %}
+                              {% if not product.product_country_prices[0].special_price %}
+                                <span class="price-new" id="price-new-{{ product.product_id }}">{{ product.product_country_prices[0].original_price }}</span>
+                              {% else %}
+                                <span class="price-new" id="price-new-{{ product.product_id }}">{{ product.product_country_prices[0].special_price }}</span>
+                                <span class="price-old" id="price-old-{{ product.product_id }}">{{ product.product_country_prices[0].original_price }}</span>
+                              {% endif %}
+                            {% endif %}
+                          {% else %}
+                            {% if product.price %}
+                              {% if not product.special %}
+                                <span class="price-new" id="price-new-{{ product.product_id }}">{{ product.price }}</span>
+                              {% else %}
+                                <span class="price-new" id="price-new-{{ product.product_id }}">{{ product.special }}</span>
+                                <span class="price-old" id="price-old-{{ product.product_id }}">{{ product.price }}</span>
+                              {% endif %}
+                            {% endif %}
+                          {% endif %}
+                        </div>
+                      </div>
+                      {% if product.rating %}
+                        <div class="row">
+                          <div class="rating text-left">
+                            {% for i in 1..5 %}
+                              {% if product.rating > i - 1 and product.rating < i %}
+                                <span class="icon-star star-half-selected"></span>
+                              {% elseif product.rating < i %}
+                                <span class="icon-star star-normal"></span>
+                              {% else %}
+                                <span class="icon-star star-selected"></span>
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                      {% if product.product_country_prices %}
+                        <div class="row">
+                          <div class="dropup shopCountryMenu">
+                            <a href="javascript:;" class="shop-country-btn-container dropdown-toggle" id="dropdownCountryMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <img style="height:30px" class="defaultCountryIcon-{{ product.product_id }}" src="/catalog/view/theme/imuto/image/country/icon-{{ product.product_country_prices[0].name }}.png">
+                              <span class="fa fa-caret-down font30" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right shop-country-dropdown" aria-labelledby="dropdownCountryMenu2">
+                              {% for product_country_price in product.product_country_prices %}
+                                {% if not product_country_price.special_price  %}
+                                  <li><a href="javascript:;" onclick="switchDefaultCountryPrice(this);" data-pid="{{ product.product_id }}" data-datestart="{{ product_country_price.date_start }}&nbsp;--&nbsp;{{ product_country_price.date_end }}" data-countryicon="/catalog/view/theme/imuto/image/country/icon-{{ product_country_price.name }}.png" data-original="{{ product_country_price.original_price }}" data-special="{{ product_country_price.special_price }}" data-off="{{ product_country_price.country_off }}" data-hasspecial="0"><img src="/catalog/view/theme/imuto/image/country/icon-{{ product_country_price.name }}.png" class="country-icon"><span class="country-name">{{ product_country_price.upper_name }}</span></a></li>
+                                {% else %}
+                                  <li><a href="javascript:;" onclick="switchDefaultCountryPrice(this);" data-pid="{{ product.product_id }}" data-datestart="{{ product_country_price.date_start }}&nbsp;--&nbsp;{{ product_country_price.date_end }}" data-countryicon="/catalog/view/theme/imuto/image/country/icon-{{ product_country_price.name }}.png" data-original="{{ product_country_price.original_price }}" data-special="{{ product_country_price.special_price }}" data-off="{{ product_country_price.country_off }}" data-hasspecial="1"><img src="/catalog/view/theme/imuto/image/country/icon-{{ product_country_price.name }}.png" class="country-icon"><span class="country-name">{{ product_country_price.upper_name }}</span></a></li>
+                                {% endif %}
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                        <script type="text/javascript">
+                          function switchDefaultCountryPrice (e) {
+                            var countryIcon = $(e).data('countryicon');
+                            var originalPrice = $(e).data('original');
+                            var specialPrice = $(e).data('special');
+                            var countryOff = $(e).data('off');
+                            var hasSpecial = $(e).data('hasspecial');
+                            var productId = $(e).data('pid');
+                            var dateStart = $(e).data('datestart');
+
+                            $('.defaultCountryIcon-' + productId).attr('src', countryIcon);
+                            if (hasSpecial > 0) {
+                              $('#off-' + productId).text(countryOff);
+                              $('#price-new-' + productId).text(specialPrice);
+                              $('#price-old-' + productId).text(originalPrice);
+                              $('#date-start-' + productId).text(dateStart);
+                            } else {
+                              $('#off-' + productId).text(countryOff);
+                              $('#price-new-' + productId).text(originalPrice);
+                              $('#price-old-' + productId).text('');
+                              $('#date-start-' + productId).text();
+                            }
+                          }
+                        </script>
+                      {% else %}
+                        <div class="row">
+                          <div class="dropdown shopCountryMenu">
+                            <a href="javascript:;" class="shop-country-btn-container dropdown-toggle" id="dropdownCountryMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <img src="/catalog/view/theme/imuto/image/country/icon-{{ product.shop_country_attribute[0].name }}.png">
+                              <span class="fa fa-caret-down font30" aria-hidden="true"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right shop-country-dropdown" aria-labelledby="dropdownCountryMenu2">
+                              {% for attribute in product.shop_country_attribute %}
+                                <li><a href="{{ attribute.text }}" target="_blank"><img src="/catalog/view/theme/imuto/image/country/icon-{{ attribute.name }}.png" class="country-icon"><span class="country-name">{{ attribute.upper_name }}</span></a></li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">{{ pagination }}</div>
+        </div>
+      {% else %}
+        <p class="font-bold font16 text-center">{{ text_no_product }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{{ footer }}

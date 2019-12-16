@@ -1,0 +1,633 @@
+{{ header }}
+<div id="product-product" class="product-content-container">
+	
+	<div class="container">
+		<ul class="breadcrumb">
+  		</ul>
+		<div class="row">	
+			<div class="col-xs-12 col-xs-offset-0 col-sm-5 col-sm-offset-1">
+				{% if images %}
+					<div class="preload-img-list">
+						{% for image in images %}
+							<img src="{{ image.zoom }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+						{% endfor %}
+					</div>
+					<div class="main-product-thumbnail">
+						<img class="elevateZoom hidden-xs" src="{{ images[0].zoom }}" data-zoom-image="{{ images[0].zoom }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+						<img id="main-product-thumbnail" class="visible-xs-block" src="{{ images[0].zoom }}" data-zoom-image="{{ images[0].zoom }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
+					</div>
+					<div class="product-swiper-container">
+						<div id="productSlideshow" class="swiper-container thumbnails">
+							<div class="swiper-wrapper">
+								{% for image in images %}
+									<div class="swiper-slide text-center"><a class="thumbnail" href="{{ image.zoom }}" data-zoom-image="{{ image.zoom }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			<div class="col-xs-12 col-sm-5">
+				<div>
+					<h3>{{ heading_title }}</h3>
+					<br/>
+					{% if review_status %}
+						<div class="rating">
+							<p>
+								{% for i in 1..5 %}
+									{% if rating > i - 1 and rating < i %}
+										<span class="icon-star star-half-selected"></span>
+									{% elseif rating < i %}
+										<span class="icon-star star-normal"></span>
+									{% else %}
+										<span class="icon-star star-selected"></span>
+									{% endif %}
+								{% endfor %}
+								<span style="margin-left: 40px">
+									<button title="Share To Twtter" class="btu-share" id="share-twitter"><img style="height:30px" src="/image/twtter.jpg"></button>
+								</span>
+								<span>
+									<button title="Share To Facebook" class="btu-share" id="share-facebook"><img style="height:30px" src="/image/facebook.png"></button>
+								</span>
+								<span>
+									<button title="Share To Pinterest" class="btu-share" id="share-pinterest"><img style="height:30px" src="/image/pinterest.jpg"></button>
+								</span>
+							</p>
+
+							{% if products %}
+								<p>
+									<span>{{ text_color }}&nbsp;&nbsp;&nbsp;</span>
+									{% for product in products %}
+										{% if product.color_code == color_attribute %}
+											<a class="color-badge selected" title="{{ product.name }}" href="{{ product.href }}"><span class="" style="background: #{{ product.color_code }};border:solid 1px gray"></span></a>
+											<input type="hidden" name="product_id" value="{{product.product_id}}" />
+										{% else %}
+											<a class="color-badge" title="{{ product.name }}" href="{{ product.href }}"><span class="" style="background: #{{ product.color_code }};border:solid 1px gray"></span></a>
+											<input type="hidden" name="product_id" value="{{product.product_id}}" />
+										{% endif %}
+									{% endfor %}
+								</p>
+							{% endif %}
+							<hr style="border-color: #545556;">
+						</div>
+					{% endif %}
+				</div>
+				{% if summary %}
+					<div>
+						{{ summary }}
+						<hr style="border-color: #545556;">
+					</div>
+				{% endif %}
+				<div class="price">
+					{% if price %}
+						{% if not special %}
+							<h2 class="price-new">{{ price }}</h2>
+							<input type="hidden" name="price" value="{{ price }}">
+						{% else %}
+							<h2 class="price-new">{{ special }}</h2>
+							<input type="hidden" name="price" value="{{ special }}">
+							<span class="price-old">{{ price }}</span>
+						{% endif %}
+					{% endif %}
+				</div>
+				
+				<div class="input-group spinner" data-trigger="spinner" id="spinner" style="height:36px;margin-bottom:10px">
+					<div class="input-group-addon" style="padding:0px">
+						<a style="width:45px;height:20px" href="javascript:;" class="spin-down" data-spin="down"><i class="font20" style="font-style: normal;">-</i></a></div>
+					<input name="quantity" type="text" class="form-control" value="1" data-min="1" data-step="1" style="height:40px;">
+					<div class="input-group-addon" style="padding:0px">
+						<a  style="width:45px;height:20px " href="javascript:;" class="spin-up" data-spin="up"><i class="font20" style="font-style: normal;">+</i></a></div>
+				</div>
+				<div class="shopping-cart-container">
+					<div class="dropdown">
+						<!-- <a href="javascript:;" class="cart-btn-container dropdown-toggle" id="dropdownCountryMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fa fa-shopping-cart cart-btn fa-flip-horizontal font25"></i>
+						</a> -->
+
+			            <button type="button" id="button-cart" class="fa fa-shopping-cart cart-btn font14 btn-primary btn-lg btn-block"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<div class="container detail-tab-menu text-center hidden-xs">
+		<ul class="detail-tab list-unstyled list-inline">
+			<li><a href="#tab-highlights" class="smooth">{{ text_highlights }}</a></li>
+			<li class="hidden-xs"><span class="dot"></span></li>
+			<li><a href="#tab-specification" class="smooth">{{ text_specs }}</a></li>
+			<li class="hidden-xs"><span class="dot"></span></li>
+			<li><a href="#tab-boxContent" class="smooth">{{ text_what_is_in_the_box_abbrev }}</a></li>
+			<li class="hidden-xs"><span class="dot"></span></li>
+			<li><a href="#tab-downloads" class="smooth">{{ text_downloads }}</a></li>
+			<li class="hidden-xs"><span class="dot"></span></li>
+			<li><a href="#tab-reviews" class="smooth">{{ text_reviews }}</a></li>
+		</ul>
+	</div>
+	{% if description %}
+		<div class="container-fluid text-center margin-bottom40" id="tab-highlights">
+			<div class="row">
+				{{ description }}
+			</div>
+		</div>
+	{% endif %}
+
+	{% if tech_attributes %}
+		<div class="container margin-bottom40 technology-container">
+			{% for tech_attribute in tech_attributes %}
+				<div class="row technology-item">
+					<div class="col-xs-12 col-sm-2 text-center">
+						<img src="{{ tech_attribute.img }}" style="max-width: 100%;">
+					</div>
+					<div class="col-xs-12 col-sm-10">
+						<h4 class="font-bold technology-title">{{ tech_attribute.name }}</h4>
+						<div class="technology-content">
+							{{ tech_attribute.text }}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+	<div class="container">
+		{% if features %}
+			<div class="row margin-bottom40">
+				<div class="col-xs-12">
+					<h4 class="font-bold">{{ text_features }}</h4>
+					<div>
+						{{ features }}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		<div class="row">
+			{% if specification %}
+				<div class="col-xs-12 col-sm-6" id="tab-specification">
+					<h4 class="font-bold">{{ text_specification }}</h4>
+					<div class="specification-content">
+						{{ specification }}
+					</div>
+				</div>
+			{% endif %}
+
+			{% if box_content %}
+				<div class="col-xs-12 col-sm-5 col-sm-offset-1" id="tab-boxContent">
+					<h4 class="font-bold">{{ text_what_is_in_the_box }}</h4>
+					<div class="box-content">
+						{{ box_content }}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+
+		{% if product_dowloads %}
+			<div class="row margin-bottom40 margin-top40" id="tab-downloads">
+				<div class="col-xs-12">
+					<h4 class="font-bold">{{ text_downloads }}</h4>
+					<div class="download-content">
+						{% for product_dowload in product_dowloads %}
+							<a class="download-item" href="{{ product_dowload.href }}" target="_blank">
+								<img src="/catalog/view/theme/imuto/image/icon/icon-product-file-download.png" style="max-width: 40px; margin-right: 10px;">{{ product_dowload.title }}
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		<div class="row margin-bottom40" id="tab-reviews">
+			<div class="col-xs-12">
+				<h4 class="font-bold" style="margin-top:60px">{{ text_reviews }}</h4>
+				<div class="reviews-content" id="review">
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab-review">
+              <form class="form-horizontal" id="form-review">
+                <div id="review"></div>
+                <h2>{{ text_write }}</h2>
+                {% if review_guest %}
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-name">{{ entry_name }}</label>
+                    <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-title">{{ entry_title }}</label>
+                    <input type="text" name="title" value="" id="input-title" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <div class="col-sm-12">
+                    <label class="control-label" for="input-review">{{ entry_review }}</label>
+                    <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                    <div class="help-block">{{ text_note }}</div>
+                  </div>
+                </div>
+                <a class="btn" id="btn">upload image</a>Maximum 1M, support jpg, gif, png format. 
+				<ul id="ul_pics" class="ul_pics clearfix"></ul>
+
+                <div class="form-group required"> <!-- //2019-10-25 星级评价 -->
+            	<div class="col-sm-12">
+                    <label class="control-label">{{ entry_rating }}</label>
+                	<input type="hidden" name="rating" value="0"/><p onmouseover="rate(this,event)"><img style="width:20px;height:20px;" src="image/icon-star.png" /><img style="width:20px;height:20px;" src="image/icon-star.png"/><img style="width:20px;height:20px;" src="image/icon-star.png" /><img style="width:20px;height:20px;" src="image/icon-star.png"/><img style="width:20px;height:20px;" src="image/icon-star.png" /></p>
+            	</div>
+	            </div>
+
+                {{ captcha }}
+                <div class="buttons clearfix">
+                  <div class="pull-right">
+                    <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+                  </div>
+                </div>
+                {% else %}
+                {{ text_login }}
+                {% endif %}
+              </form>
+            </div>
+	</div>
+</div>
+<script type="text/javascript">
+	$("#share-twitter").on('click',function(){
+    var text = "This is a pretty good product \r\n{{ product_href }}";
+    window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(text));    
+	});
+	$("#share-facebook").on('click',function(){
+    var text1 = "{{ product_href }}";
+    window.open("http://www.facebook.com/sharer.php?u="+encodeURIComponent(text1));    
+	});
+	$("#share-pinterest").on('click',function(){
+    var text2 = "{{ product_href }}";
+    window.open("https://www.pinterest.com/pin/find/?url="+encodeURIComponent(text2));    
+	});
+</script>
+<script>  //2019-10-25 星级评级选择
+function rate(obj,oEvent){
+var imgSrc = 'image/icon-star.png';
+var imgSrc_2 = 'image/icon-star-selected.png';
+if(obj.rateFlag) return;
+var e = oEvent || window.event;
+var target = e.target || e.srcElement; 
+var imgArray = obj.getElementsByTagName("img");
+for(var i=0;i<imgArray.length;i++){
+   imgArray[i]._num = i;
+   imgArray[i].onclick=function(){
+    if(obj.rateFlag) return;
+	var inputid=this.parentNode.previousSibling
+	inputid.value=this._num+1;
+   }
+}
+if(target.tagName=="IMG"){
+   for(var j=0;j<imgArray.length;j++){
+    
+    if(j<=target._num){
+     imgArray[j].src=imgSrc_2;
+    } else {
+     imgArray[j].src=imgSrc;
+    }
+	target.parentNode.onmouseout=function(){
+	var imgnum=parseInt(target.parentNode.previousSibling.value);
+		for(n=0;n<imgArray.length;n++){
+			imgArray[n].src=imgSrc;
+		}
+		for(n=0;n<imgnum;n++){
+			imgArray[n].src=imgSrc_2;
+		}
+	}
+   }
+} else {
+	 return false;
+}
+}
+</script>
+<script type="text/javascript"> //2019-10-23  成功提示删除效果
+	$(".breadcrumb").on('click','button',function(){
+		$("#alert-success").fadeTo("slow", 0.01, function(){//fade
+	      $(this).hide(1000);//then remove from the DOM
+      });
+	})
+</script>
+<script type="text/javascript">
+	var uploader = new plupload.Uploader({ //创建实例的构造方法 
+    runtimes: 'html5,flash,silverlight,html4', 
+    //上传插件初始化选用那种方式的优先级顺序 
+    browse_button: 'btn', 
+    // 上传按钮 
+    url: "index.php?route=product/product/upload", 
+    //远程上传地址 
+    flash_swf_url: 'plupload/Moxie.swf', 
+    //flash文件地址 
+    silverlight_xap_url: 'plupload/Moxie.xap', 
+    //silverlight文件地址 
+    filters: { 
+        max_file_size: '500kb', 
+        //最大上传文件大小（格式100b, 10kb, 10mb, 1gb） 
+        mime_types: [ //允许文件上传类型 
+        { 
+            title: "files", 
+            extensions: "jpg,png,gif,jpeg" 
+        }] 
+    }, 
+    multi_selection: true, 
+    //true:ctrl多文件上传, false 单文件上传 
+    init: { 
+        FilesAdded: function(up, files) { //文件上传前 
+            if ($("#ul_pics").children("li").length > 3) { 
+                alert("You uploaded too many pictures!"); 
+                uploader.destroy(); 
+            } else { 
+                var li = ''; 
+                plupload.each(files, 
+                function(file) { //遍历文件 
+                    li += "<li id='" + file['id'] + "'><div class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>"; 
+                }); 
+                $("#ul_pics").append(li); 
+                uploader.start(); 
+            } 
+        }, 
+        UploadProgress: function(up, file) { //上传中，显示进度条 
+            $("#" + file.id).find('.bar').css({ 
+                "width": file.percent + "%" 
+            }).find(".percent").text(file.percent + "%"); 
+        }, 
+        FileUploaded: function(up, file, info) { //文件上传成功的时候触发 
+            var data = JSON.parse(info.response); 
+            $("#" + file.id).html("<div class='img'><input type='hidden' name='img" + file['id'] + "' value='" + data.pic + "'/><img style='width:100px;' src='" + data.pic + "'/><i onclick='delimg(this)'>X</i></div>"); 
+        }, 
+        Error: function(up, err) { //上传出错的时候触发 
+            alert(err.message); 
+        } 
+    } 
+}); 
+uploader.init();
+	function delimg(o){
+	  var src = $(o).prev().attr("src");  
+	  $.post("index.php?route=product/product/delimg&get=delimg&imgurl="+src,function(data){    
+	    if(data==1){ 
+	      $(o).parent().parent().remove(); 
+	    } 
+	  })
+	}
+</script>
+<script type="text/javascript"><!--
+	$('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
+		$.ajax({
+			url: 'index.php?route=product/product/getRecurringDescription',
+			type: 'post',
+			data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+			dataType: 'json',
+			beforeSend: function() {
+				$('#recurring-description').html('');
+			},
+			success: function(json) {
+				$('.alert-dismissible, .text-danger').remove();
+
+				if (json['success']) {
+					$('#recurring-description').html(json['success']);
+				}
+			}
+		});
+	});
+	//--></script>
+<script type="text/javascript"><!--
+	$('#button-cart').on('click', function() {
+		$.ajax({
+			url: 'index.php?route=checkout/cart/add',
+			type: 'post',
+			data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], input[name=\'product_id\'], input[name=\'price\'], input[name=\'quantity\'], #product select, #product textarea'),
+			dataType: 'json',
+			beforeSend: function() {
+				$('#button-cart').button('loading');
+			},
+			complete: function() {
+				$('#button-cart').button('reset');
+			},
+			success: function(json) {
+				$('.alert-dismissible, .text-danger').remove();
+				$('.form-group').removeClass('has-error');
+
+				if (json['error']) {
+					if (json['error']['option']) {
+						for (i in json['error']['option']) {
+							var element = $('#input-option' + i.replace('_', '-'));
+
+							if (element.parent().hasClass('input-group')) {
+								element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+							} else {
+								element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+							}
+						}
+					}
+
+					if (json['error']['recurring']) {
+						$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+					}
+
+					if (json['error']['quantity']) {
+						$('.breadcrumb').append('<div id="alert-success" class="alert alert-danger alert-dismissible">' + json['error']['quantity'] + '<button type="button" class="close">&times;</button></div>');
+					}
+					if(json['error']['price']) {
+						$('.breadcrumb').append('<div id="alert-success"  class="alert alert-danger alert-dismissible">' + json['error']['price'] + '<button type="button" class="close" >&times;</button></div>');
+					}
+					// Highlight any found errors
+					$('.text-danger').parent().addClass('has-error');
+				}
+
+				if (json['success']) {
+
+					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+
+					$('html, body').animate({ scrollTop: 0 }, 'slow');
+
+					$('#cart > ul').load('index.php?route=common/cart/info ul li');
+
+					$('.breadcrumb').append(function(){
+						return "<div id='alert-success' class='alert alert-success alert-dismissible'>" + "Successfully added items to the shopping cart" + "<button type='button' class='close' >&times;</button></div>";
+					});
+
+					if ($(".top-menu-num").length > 0){ 
+						$('.top-menu-num').html(json['num']);
+					}else{
+						$('#shopping_cart').append('<i class="top-menu-num">'+json['num']+'</i>');
+					}
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});
+	//--></script>
+<script type="text/javascript"><!--
+	$('.date').datetimepicker({
+		language: '{{ datepicker }}',
+		pickTime: false
+	});
+
+	$('.datetime').datetimepicker({
+		language: '{{ datepicker }}',
+		pickDate: true,
+		pickTime: true
+	});
+
+	$('.time').datetimepicker({
+		language: '{{ datepicker }}',
+		pickDate: false
+	});
+
+	$('button[id^=\'button-upload\']').on('click', function() {
+		var node = this;
+
+		$('#form-upload').remove();
+
+		$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+		$('#form-upload input[name=\'file\']').trigger('click');
+
+		if (typeof timer != 'undefined') {
+			clearInterval(timer);
+		}
+
+		timer = setInterval(function() {
+			if ($('#form-upload input[name=\'file\']').val() != '') {
+				clearInterval(timer);
+
+				$.ajax({
+					url: 'index.php?route=tool/upload',
+					type: 'post',
+					dataType: 'json',
+					data: new FormData($('#form-upload')[0]),
+					cache: false,
+					contentType: false,
+					processData: false,
+					beforeSend: function() {
+						$(node).button('loading');
+					},
+					complete: function() {
+						$(node).button('reset');
+					},
+					success: function(json) {
+						$('.text-danger').remove();
+
+						if (json['error']) {
+							$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+						}
+
+						if (json['success']) {
+							alert(json['success']);
+
+							$(node).parent().find('input').val(json['code']);
+						}
+					},
+					error: function(xhr, ajaxOptions, thrownError) {
+						alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+					}
+				});
+			}
+		}, 500);
+	});
+	//--></script>
+<script type="text/javascript"><!--
+	$('#review').delegate('.pagination a, .imuto-pagination a', 'click', function(e) {
+		e.preventDefault();
+
+		$('#review').fadeOut('slow');
+
+		$('#review').load(this.href);
+
+		$('#review').fadeIn('slow');
+	});
+
+	$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
+
+	$('#button-review').on('click', function() {
+		$.ajax({
+			url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+			type: 'post',
+			dataType: 'json',
+			data: $("#form-review").serialize(),
+			beforeSend: function() {
+				$('#button-review').button('loading');
+			},
+			complete: function() {
+				$('#button-review').button('reset');
+			},
+			success: function(json) {
+				$('.alert-dismissible').remove();
+
+				if (json['error']) {
+					$('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+				}
+
+				if (json['success']) {
+					$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+					$('input[name=\'name\']').val('');
+					$('input[name=\'title\']').val('');
+					$('textarea[name=\'text\']').val('');
+					$('input[name=\'rating\']:checked').prop('checked', false);
+					$('#ul_pics').empty();  //去除评论图片
+				}
+			}
+		});
+	});
+
+	$(document).ready(function() {
+		$('.thumbnails').magnificPopup({
+			type:'image',
+			delegate: 'a',
+			gallery: {
+				enabled: true
+			}
+		});
+
+		$('.elevateZoom').elevateZoom();
+
+		$(document).on('mouseover', '.product-swiper-container a.thumbnail', function(){
+			var imgSrc = $(this).attr('href');
+			var imgZoomSrc = $(this).data('zoom-image');
+			var title = $(this).attr('title');
+			var zoomImgObj = $(".elevateZoom");
+			var bigImgObj = $("#main-product-thumbnail");
+
+			//mobile not zoom
+			bigImgObj.attr('src', imgSrc);
+
+			//pc and pad zoom
+			zoomImgObj.attr('src', imgSrc);
+			zoomImgObj.attr('data-zoom-image', imgZoomSrc);
+			zoomImgObj.data('zoom-image', imgZoomSrc);
+			$('.zoomContainer').remove();
+
+			var ez = zoomImgObj.data('elevateZoom');
+			ez.init(ez.options, ez.elem);
+		});
+		var productSwiper = $('#productSlideshow').swiper({
+			mode: 'horizontal',
+			slidesPerView: 5,
+			slidesPerGroup : 5,
+			pagination: '.productSlideshow',
+			paginationClickable: true,
+			spaceBetween: 5,
+			loop: false
+		});
+
+		/*平滑滚动*/
+		if ($('.smooth').length) {
+			$('.smooth').on('click', function(e) {
+				e.preventDefault();
+				$(this).addClass('active').siblings().removeClass('active');
+				$('html,body').animate({
+					scrollTop: $($(this).attr('href')).offset().top + 'px'
+				}, 500)
+			})
+		}
+	});
+	//--></script>
+{{ footer }}

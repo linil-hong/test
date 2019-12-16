@@ -1,0 +1,57 @@
+{{ header }}
+<div id="product-new-products" class="container-fluid content-container" style="margin-top: 0;">
+  <div class="row page-banner">
+    {% if lang == en %}
+    <img src="/catalog/view/theme/imuto/image/new-products.jpg" class="img-responsive img-width-full">
+    {% else %}
+    <img src="/catalog/view/theme/imuto/image/(new-products)_jp.jpg" class="img-responsive img-width-full">
+    {% endif %}
+  </div>
+  <div class="row product-content">
+    <div class="container">
+      {% if products %}
+        <div class="row">
+          {% for product in products %}
+            <div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <div class="product-thumb">
+                {% if product.is_new %}
+                  <div class="is-new">
+                    <img src="/catalog/view/theme/imuto/image/icon/icon-new.png">
+                  </div>
+                {% endif %}
+                <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+                <div class="product-info">
+                  <div class="caption">
+                    <h4 class="product-name"><a href="{{ product.href }}">{{ product.model }}</a></h4>
+                    <p>{{ product.summary }}</p>
+                    {% if product.rating %} 
+                      <div class="rating text-center">
+                        {% for i in 1..5 %}
+                          {% if product.rating > i - 1 and product.rating < i %}
+                            <span class="icon-star star-half-selected"></span>
+                          {% elseif product.rating < i %}
+                            <span class="icon-star star-normal"></span>
+                          {% else %}
+                            <span class="icon-star star-selected"></span>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    {% else %}
+                      <div style="height: 34px;"></div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center">{{ pagination }}</div>
+        </div>
+      {% else %}
+        <p class="font-bold font16 text-center">{{ text_no_product }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{{ footer }}

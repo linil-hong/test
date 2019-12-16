@@ -1,0 +1,184 @@
+{{ header }}
+<div id="common-home" class="container-fluid">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %} 
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">
+      {{ content_top }}{{ content_bottom }}
+      <div class="container">
+        <div class="row margin-bottom20">
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="home-item-box">
+              <a href="{{ best_seller_href }}" style="text-decoration: none;">
+                <div class="home-item-img-box scale-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/x6.png" class="img-responsive" style="width:156px">
+                </div>
+                <div>
+                  <p class="font-bold nomargin home-item-title font14">{{ text_best_sellers }}</p>
+                  <p class="home-item-sub-title">&nbsp;</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="home-item-box">
+              <a href="{{ new_products_href }}">
+                <div class="home-item-img-box scale-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/icon-new-release.png" class="img-responsive" style="width:156px">
+                </div>
+                <div>
+                  <p class="font-bold nomargin home-item-title font14">{{ text_new_releases }}</p>
+                  <p class="home-item-sub-title">&nbsp;</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="home-item-box">
+              <a href="{{ discount_activity_href }}">
+                <div class="home-item-img-box scale-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/E2C.png" class="img-responsive" style="width:156px">
+                </div>
+                <div>
+                  <p class="font-bold nomargin home-item-title font14">{{ text_discount_activity }}</p>
+                  <p class="font12 home-item-sub-title">{{ config_discount_activity_description }}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="home-item-box">
+              <a href="{{ our_technology_href }}">
+                <div class="home-item-img-box scale-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/icon-technology.png" class="img-responsive">
+                </div>
+                <div>
+                  <p class="font-bold nomargin home-item-title font14">{{ text_our_technology }}</p>
+                  <p class="home-item-sub-title">&nbsp;</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- What's News -->
+        {% if news_infos %}
+          <div class="row margin-bottom20">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-bottom20 scale-img-box text-center">
+              <a href="{{ news_one.news_url }}"><img src="/image/{{ news_one.image }}" style="height:230px" class="img-responsive"></a>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 margin-bottom20 home-page-news">
+              <h4 class="margin-top0 font-bold">{{ text_whats_news }}</h4>
+              {% for news_info in news_infos %}
+                <a href="{{ news_info.news_url }}">
+                  <p style="margin-bottom: 10px;font-size:13px;">
+                    {{ news_info.title }}
+                    <br/>
+                    {{ news_info.summary }}
+                  </p>
+                </a>
+              {% endfor %}
+              <p class="text-right">
+                <a href="{{ news_href }}">{{ text_more }}</a>
+              </p>
+            </div>
+          </div>
+        {% else %}
+          <div class="row margin-bottom20">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 margin-bottom20 scale-img-box text-center">
+              <a href="{{ news_href }}"><img src="/catalog/view/theme/imuto/image/placeholder-what-news.jpg" class="img-responsive"></a>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 margin-bottom20 home-page-news">
+              <h4 class="margin-top0 font-bold">{{ text_whats_news }}</h4>
+              <a href="{{ news_href }}">
+                <p>
+                  "Affordable high quality approach" to provide best value<br/>
+                </p>
+              </a>
+              <p>
+                "Less is more" design concept with more creative function<br/>
+                We use "less is more" ID design concept combining with more creative function to bring fashionable and practical products.
+              </p>
+              <p>
+                "From the people, for the people" creating satisfaction<br/>
+                We abstract every valuable information from a user's perspective to make sure our products fulfill the needs for our customer.
+              </p>
+              <p>
+                "Eco-friendly" for energetic life<br/>
+                We make sure every single component in our products from design to production has no harm for our environment to support our daily energetic life.
+              </p>
+              <p class="text-right">
+                <a href="{{ news_href }}">{{ text_more }}</a>
+              </p>
+            </div>
+          </div>
+        {% endif %}
+        <!-- Cooperation partner -->
+        <div class="row margin-bottom20">
+          <div class="col-sm-12">
+            <div class="introduction-title">
+              <i class="col-lg-4 col-md-4 col-sm-4 col-xs-2 title-line"></i>
+              <span class="text-uppercase text-center col-lg-4 col-md-4 col-sm-4 col-xs-8 font-bold" style="height:49px;">{{ text_coo_partner }}</span>
+              <i class="col-lg-4 col-md-4 col-sm-4 col-xs-2 title-line"></i>
+            </div>
+            <div class="introduction-img-container">  
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center">
+                <img src="/catalog/view/theme/imuto/image/icon/icon-amazon.png" class="img-responsive">
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 text-center" style="height:101px;">
+                <img src="/catalog/view/theme/imuto/image/icon/icon-mi-v2.png" style="max-width: 45px;" class="img-responsive">
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center" style="height:101px;">
+                <img src="/catalog/view/theme/imuto/image/icon/indiegogo.png" style="margin-top:28px;"class="img-responsive">
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 text-center" style="height:101px;">
+                <img src="/catalog/view/theme/imuto/image/icon/thunderobot.png" style="max-width: 150px;border-radius: 50px;margin-top:5px;" class="img-responsive">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Brand introduction -->
+        <div class="row margin-bottom20">
+          <div class="col-sm-12">
+            <div class="introduction-title">
+              <i class="col-lg-4 col-md-4 col-sm-4 col-xs-2 title-line"></i>
+              <span class="text-uppercase text-center col-lg-4 col-md-4 col-sm-4 col-xs-8 font-bold">{{ text_br_intr }}</span>
+              <i class="col-lg-4 col-md-4 col-sm-4 col-xs-2 title-line"></i>
+            </div>
+            <div class="introduction-img-container">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                <div class="introduction-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/icon-imuto.png" class="img-responsive">
+                </div>
+                <div class="font12 text-left">
+                  {{ text_aff }}
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                <div class="introduction-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/icon-photoolex.png" class="img-responsive" style="width:170px !important;height:45px">
+                </div>  
+                <div class="font12 text-left">
+                  {{text_acc}}
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
+                <div class="introduction-img-box">
+                  <img src="/catalog/view/theme/imuto/image/icon/icon-topturbo-v2.jpg" style="margin-top:0px !important" class="img-responsive">
+                </div>
+                <div class="font12 text-left">
+                  {{text_off}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}

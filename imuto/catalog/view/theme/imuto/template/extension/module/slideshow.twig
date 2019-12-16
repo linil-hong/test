@@ -1,0 +1,62 @@
+<div style="margin-left: -15px;margin-right: -15px;">
+    <div class="swiper-viewport">
+        <div id="slideshow{{ module }}" class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for banner in banners %}
+                    {% if loop.index == 1 %}
+                        <div class="swiper-slide text-center">
+                            <a class="playBannerVideo" style="cursor: pointer;">
+                                <img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive img-width-full">
+                            </a>
+                            <video class="videoBanner slideshow-video" controls="controls" src="/image/catalog/video/imuto.mp4" poster="{{ banner.image }}" controls="controls">Your browser does not support video.</video>
+                        </div>
+                    {% else %}
+                        <div class="swiper-slide text-center ">{% if banner.link %}<a target="_blank" href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive img-width-full" /></a>{% else %}<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive img-width-full" />{% endif %}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="swiper-pagination slideshow{{ module }} slideshow-pagination{{ module }}"></div>
+        <div class="swiper-pager">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <script type="text/javascript"><!--
+        var mySwiper{{ module }} = $('#slideshow{{ module }}').swiper({
+            mode: 'horizontal',
+            slidesPerView: 1,
+            pagination: '.slideshow{{ module }}',
+            paginationClickable: true,
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            spaceBetween: 30,
+            autoplay: 6000,
+            autoplayDisableOnInteraction: true,
+            loop: true
+        });
+
+        //Home banner video control
+        var homeSlideShowPagination = $('.slideshow-pagination{{ module }}');
+        $(document).on('click touchend', '.playBannerVideo', function(){
+            $(this).hide();
+            var videoBanner = $(this).next('.videoBanner');
+            videoBanner.get(0).play();
+            videoBanner.show();
+            homeSlideShowPagination.hide();
+
+            //disable Swiper autoplay
+            mySwiper{{ module }}.stopAutoplay();
+        });
+        $(document).on('click touchend', '.videoBanner', function(){
+            var videoBanner = $(this);
+            if(videoBanner.get(0).paused){
+                videoBanner.get(0).play();
+                homeSlideShowPagination.hide();
+            }else{
+                videoBanner.get(0).pause();
+                homeSlideShowPagination.show();
+            }
+        });
+        --></script>
+</div>

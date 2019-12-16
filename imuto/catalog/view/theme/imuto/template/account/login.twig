@@ -1,0 +1,52 @@
+{{ header }}
+<div id="account-login" class="container content-container" style="margin-top: 80px;">
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  {% if error_warning %}
+  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+  {% endif %}
+  <div class="row">
+    <div id="content">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+          <div class="padding-horizontal15">
+            <h2 class="text-center margin-bottom20">{{ text_welcome_back }}</h2>
+            <form action="{{ action }}" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon" id="login-input-email"><i class="fa fa fa-envelope" style="display: inline-block;width: 20px;"></i></span>
+                  <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" aria-describedby="login-input-email" />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon" id="login-input-password"><i class="fa fa fa-lock font16" style="display: inline-block;width: 20px;"></i></span>
+                  <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" aria-describedby="login-input-password" />
+                </div>
+                <a class="font-color-purple" href="{{ forgotten }}">{{ text_forgotten }}</a>
+              </div>
+
+              <div class="text-center">
+                <p>
+                  <input type="submit" value="{{ button_login }}" class="btn btn-purple" style="border-radius: 18px;width: 70%;" />
+                </p>
+                <p>
+                  OR
+                </p>
+                <p>
+                  <a href="{{ register }}" class="btn btn-purple" style="border-radius: 18px;width: 70%;">{{ text_create_account }}</a>
+                </p>
+              </div>
+
+              {% if redirect %}
+                <input type="hidden" name="redirect" value="{{ redirect }}" />
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

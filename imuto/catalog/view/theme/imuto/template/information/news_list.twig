@@ -1,0 +1,41 @@
+{{ header }}
+<div id="information-news-list" class="container-fluid content-container" style="margin-top: 0;">
+  <div class="row page-banner">
+    <img src="/catalog/view/theme/imuto/image/what-is-news.jpg" class="img-responsive img-width-full">
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <div class="row">
+            <h3 class="font-bold text-uppercase">{{ heading_title }}</h3>
+            <div class="title-line"></div>
+          </div>
+        </div>
+      </div>
+      {% if newsList %}
+        {% for news in newsList %}
+          <div class="row news-item">
+            <div class="col-xs-12 col-sm-4 news-image">
+              <div class="row">
+                <a href="{{ news.href }}"><img src="{{ news.image }}" title="{{ news.title }}" class="img-responsive"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <div class="news-info">
+                <p>{{ news.date }}</p>
+                <p class="font-bold"><a href="{{ news.href }}">{{ news.title }}</a></p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="row">
+          <div class="col-sm-12 text-center">{{ pagination }}</div>
+        </div>
+      {% else %}
+        <p class="font-bold font16 text-center">{{ text_no_news }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{{ footer }}

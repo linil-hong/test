@@ -1,0 +1,86 @@
+<?php include _include(APP_PATH.'view/htm/header.inc.htm');?>
+
+
+
+<div class="btn-group mb-3 d-lg-none" role="group" id="my_mobile_nav">
+
+	
+	<a role="button" class="btn btn-secondary" data-active="menu-my" href="<?php echo url('my');?>">My Account</a>
+	
+	
+	
+	<a role="button" class="btn btn-secondary" data-active="menu-my-thread" href="<?php echo url('my-thread');?>">Forum post</a>
+	
+	
+</div>
+
+<div class="row">
+	<!-- 左侧菜单 -->
+	<div class="col-lg-2 hidden-md hidden-sm" id="my_aside">
+		<div class="card">
+			<div class="card-body text-center">
+				
+				<img class="avatar-4" src="<?php echo $user['avatar_url'];?>">
+				<br><?php echo $user['username'];?>
+				
+			</div>
+			<div class="list-group list-group-flush text-center">
+				
+				<a href="<?php echo url('my');?>" class="list-group-item list-group-item-action" data-active="menu-my">My Account</a>
+				
+				
+				
+				<a href="<?php echo url('my-thread');?>" class="list-group-item list-group-item-action" data-active="menu-my-thread">Forum post</a>
+				
+				
+			</div>
+		</div>
+	</div>
+	<!-- 右侧内容 -->
+	<div class="col-lg-10" id="my_main">
+		
+		<div class="card">
+			<div class="card-header">
+				
+				
+		<ul class="nav nav-tabs card-header-tabs">
+			
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo url("my-thread");?>" data-active="my-thread"><?php echo lang('my_thread');?></a>
+			</li>
+			
+		</ul>
+	
+				
+			</div>
+			<div class="card-body">
+				
+				
+		<ul class="list-unstyled threadlist mb-0">
+			<?php include _include(APP_PATH.'view/htm/thread_list.inc.htm');?>
+		</ul>
+		
+		<?php if($pagination) { ?>
+		<nav><ul class="pagination justify-content-center flex-wrap"><?php echo $pagination; ?></ul></nav>
+		<?php } ?>
+	
+				
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
+
+<?php include _include(APP_PATH.'view/htm/footer.inc.htm');?>
+
+
+
+<script>
+$('a[data-active="menu-my-thread"]').addClass('active');
+</script>
+
+<script>
+$('a[data-active="my-thread"]').addClass('active');
+</script>

@@ -1,0 +1,31 @@
+{{ header }}
+<div id="account-account" class="container content-container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li class="font14"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+  {% endif %}
+  <div class="row">
+    <div id="content" class="col-xs-12 col-sm-9">
+      <h2>{{ text_my_account }}</h2>
+      <ul class="list-unstyled font16">
+        <li><a class="font-color-purple" href="{{ edit }}">{{ text_edit }}</a></li>
+        <li><a class="font-color-purple" href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+        <li><a class="font-color-purple" href="{{ password }}">{{ text_password }}</a></li>
+      </ul>
+      <h2>{{ text_my_orders }}</h2>
+      <ul class="list-unstyled font16">
+        <li><a class="font-color-purple" href="{{ order }}">{{ text_order }}</a></li>
+        <li><a class="font-color-purple" href="{{ return }}">{{ text_return }}</a></li>
+        <li><a class="font-color-purple" href="{{ address }}">{{ text_address }}</a></li>
+      </ul> 
+    </div>
+    <div class="col-sm-3 hidden-xs">
+      {{ account_right }}
+    </div>
+  </div>
+</div>
+{{ footer }}
